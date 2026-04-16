@@ -1,0 +1,33 @@
+# High-Efficiency AI Operating Protocol (SDLC 2026) - Project Rules
+
+## 1. Core Technical Stack
+- Framework: .NET 8 / C# 12
+- Architecture: Clean Architecture / Domain-Driven Design (DDD)
+- DI: Always use Constructor Injection.
+- Async: Enforce 'Async' all the way down; avoid .Result or .Wait().
+
+## 2. Manufacturing Logic & Domain Standards
+- Domain: Manufacturing Execution Systems (MES).
+- Patterns: Adhere to Siemens Opcenter integration standards.
+- Data Integrity: All logic involving machine state must include retry policies (Polly) and idempotency checks.
+- Units: Always specify units of measure in variable names (e.g., `temperatureCelsius`, `pressureBar`).
+
+## 3. xUnit & Testing Requirements (MANDATORY)
+- Framework: xUnit with Moq and FluentAssertions.
+- Structure: One test project per main project. File naming: [ClassName]Tests.cs.
+- Requirements: 
+    - Every new service must have a corresponding Unit Test.
+    - Use the AAA (Arrange, Act, Assert) pattern.
+    - Mock all external dependencies (Database, API, PLC connectors).
+- Execution: AI must verify code by attempting to run `dotnet test` in the terminal before finalizing a task.
+
+## 4. OpenTelemetry & Observability Standards
+- Implementation: Use the OpenTelemetry .NET SDK.
+- Spans: Every Service-level method must start a new Activity (Span).
+- Tags: Mandatorily include 'manufacturing.line.id', 'user.id', and 'operation.type' in all spans.
+- Logging: Use ILogger with structured logging. No `Console.WriteLine`.
+
+## 5. Security & Snyk Guardrails (Tier A/B)
+- Secrets: NEVER hardcode connection strings or API keys. Use User Secrets or Environment Variables.
+- Vulnerabilities: Before submitting code, the agent should check for "Snyk" highlights in the IDE.
+- IP Protection: Do not suggest external libraries without checking if they are pre-approved for manufacturing environments.
