@@ -29,5 +29,13 @@
   </head>
   <body>
     <h1>Welcome to Dhruv</h1>
+    <div id="user-input"></div>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  // Avoid DOM XSS: write untrusted URL data using textContent (not innerHTML).
+  const userInputElement = document.getElementById('user-input');
+  const name = params.get('name') ?? '';
+  userInputElement.textContent = name;
+</script>
   </body>
 </html>
