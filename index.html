@@ -15,27 +15,71 @@
         color: #1f2937;
       }
 
-      h1 {
-        margin: 0;
-        font-size: clamp(2rem, 5vw, 3.25rem);
-        padding: 24px 44px;
+      .card {
+        width: min(92vw, 560px);
         background: #ffffff;
         border: 1px solid rgba(0, 0, 0, 0.06);
         border-radius: 16px;
         box-shadow: 0 12px 30px rgba(17, 24, 39, 0.12);
+        padding: 28px;
         text-align: center;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(2rem, 5vw, 3.25rem);
+      }
+
+      p {
+        margin: 0;
+        color: #4b5563;
+      }
+
+      .controls {
+        margin-top: 22px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      input {
+        flex: 1;
+        min-width: 0;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font-size: 1rem;
+      }
+
+      button {
+        border: none;
+        border-radius: 10px;
+        background: #1f2937;
+        color: #ffffff;
+        padding: 10px 14px;
+        font-size: 1rem;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
-    <h1>Welcome to Dhruv</h1>
-    <div id="user-input"></div>
-<script>
-  const params = new URLSearchParams(window.location.search);
-  // Avoid DOM XSS: write untrusted URL data using textContent (not innerHTML).
-  const userInputElement = document.getElementById('user-input');
-  const name = params.get('name') ?? '';
-  userInputElement.textContent = name;
-</script>
+    <main class="card">
+      <h1 id="welcome-message">Welcome to Dhruv</h1>
+      <p>Simple UI for issue #2.</p>
+      <div class="controls">
+        <input id="name-input" type="text" placeholder="Enter your name" />
+        <button id="update-button" type="button">Update</button>
+      </div>
+    </main>
+    <script>
+      const messageElement = document.getElementById("welcome-message");
+      const nameInputElement = document.getElementById("name-input");
+      const updateButtonElement = document.getElementById("update-button");
+
+      updateButtonElement.addEventListener("click", () => {
+        const name = nameInputElement.value.trim();
+        messageElement.textContent = name ? `Welcome to ${name}` : "Welcome to Dhruv";
+      });
+    </script>
   </body>
 </html>
