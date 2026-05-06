@@ -60,6 +60,26 @@
         font-size: 1rem;
         cursor: pointer;
       }
+
+      .decision-controls {
+        margin-top: 12px;
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+      }
+
+      .accept-button {
+        background: #15803d;
+      }
+
+      .reject-button {
+        background: #b91c1c;
+      }
+
+      #decision-status {
+        margin-top: 12px;
+        font-weight: 600;
+      }
     </style>
   </head>
   <body>
@@ -70,15 +90,31 @@
         <input id="name-input" type="text" placeholder="Enter your name" />
         <button id="update-button" type="button">Update</button>
       </div>
+      <div class="decision-controls">
+        <button id="accept-button" class="accept-button" type="button">Accept</button>
+        <button id="reject-button" class="reject-button" type="button">Reject</button>
+      </div>
+      <p id="decision-status">Status: Pending</p>
     </main>
     <script>
       const messageElement = document.getElementById("welcome-message");
       const nameInputElement = document.getElementById("name-input");
       const updateButtonElement = document.getElementById("update-button");
+      const acceptButtonElement = document.getElementById("accept-button");
+      const rejectButtonElement = document.getElementById("reject-button");
+      const decisionStatusElement = document.getElementById("decision-status");
 
       updateButtonElement.addEventListener("click", () => {
         const name = nameInputElement.value.trim();
         messageElement.textContent = name ? `Welcome to ${name}` : "Welcome to Dhruv";
+      });
+
+      acceptButtonElement.addEventListener("click", () => {
+        decisionStatusElement.textContent = "Status: Accepted";
+      });
+
+      rejectButtonElement.addEventListener("click", () => {
+        decisionStatusElement.textContent = "Status: Rejected";
       });
     </script>
   </body>
